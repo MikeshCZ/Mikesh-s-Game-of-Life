@@ -109,7 +109,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <Version>1.00</Version>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -137,11 +137,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="config.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="config.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="simulation.h" />
   </ItemGroup>

@@ -14,9 +14,9 @@ void Grid::Draw()
 				// live color
 				randomValue = GetRandomValue(0, 20);
 				tempLive.r = live.r + randomValue;
-				randomValue = GetRandomValue(-20, 20);
+				randomValue = GetRandomValue(-10, 10);
 				tempLive.g = live.g + randomValue;
-				randomValue = GetRandomValue(-20, 20);
+				randomValue = GetRandomValue(-10, 10);
 				tempDead.b = dead.b + randomValue;
 				// dead color
 				randomValue = GetRandomValue(-10, 10);

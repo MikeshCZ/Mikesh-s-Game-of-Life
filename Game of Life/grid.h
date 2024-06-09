@@ -26,10 +26,10 @@ private:
 	int								columns;
 	int								cellSize;
 	std::vector<std::vector<int>>	cells;
-	Color							live = { 0, 170, 174, 255 };
-	Color							tempLive = live;
-	Color							dead = { 136, 104, 79, 100 };
-	Color							tempDead = dead;
+	Color							live		= { 0, 170, 174, 255 };
+	Color							tempLive	= live;
+	Color							dead		= { 136, 104, 79, 100 };
+	Color							tempDead	= dead;
 	bool							randomColors;
 	int								edgesWidth;
 	bool							IsWithinBounds(int row, int column);

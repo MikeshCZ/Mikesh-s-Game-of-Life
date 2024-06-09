@@ -4,61 +4,27 @@
 #include <fstream>
 #include <string>
 #include "simulation.h"
+#include "config.h"
 
-// Functions to create a default config.ini file
-static void CreateDefaultConfigFile(const std::string& filename) {
-	std::ofstream file(filename);
-	if (file.is_open()) {
-		file << "[window]\n";
-		file << "width=1280\n";
-		file << "height=720\n";
-		file << "fps=30\n";
-		file << "fullscreen=false\n";
-		file << "[cell]\n";
-		file << "size=5\n";
-		file << "edgeColorR=60\n";
-		file << "edgeColorG=60\n";
-		file << "edgeColorB=60\n";
-		file << "edgeColorA=255\n";
-		file << "edgeWidth=1\n";
-		file << "randomColors=true\n";
-		file.close();
-	}
-	else {
-		std::cerr << "Unable to create config file: " << filename << std::endl;
-	}
-}
-
-int WinMain()
+int main()
 {
 	// ####################
 	// # READ CONFIG FILE #
 	// ####################
 
-	const std::string configFilename = "config.ini";
-
-	// Check for the existence of the config.ini file and create it if it does not exist
-	std::ifstream infile(configFilename);
-	if (!infile.good()) {
-		std::cout << "Config file not found, creating default config file...\n";
-		CreateDefaultConfigFile(configFilename);
-	}
-
-	INIReader reader(configFilename);
+	Config config;
+	int initOK = config.Initialization();
+	if (initOK == 1) { return 1; }
+	INIReader reader(config.GetFileName());
 	
-	if (reader.ParseError() < 0) {
-		std::cout << "Can't load '" + configFilename + "'\n";
-		// return 1;
-	}
-
 	// ##################
 	// # INICIALIZATION #
 	// ##################
 
 	// Constants
-	const int WINDOW_WIDTH = reader.GetInteger("window", "width", 1000);
-	const int WINDOW_HEIGHT = reader.GetInteger("window", "height", 600);
-	const int CELL_SIZE = reader.GetInteger("cell", "size", 10);
+	const int WINDOW_WIDTH = reader.GetInteger("window", "width", 1280);
+	const int WINDOW_HEIGHT = reader.GetInteger("window", "height", 720);
+	const int CELL_SIZE = reader.GetInteger("cell", "size", 5);
 	const Color GREY = { reader.GetInteger("cell","edgeColorR",60), reader.GetInteger("cell","edgeColorG",60), reader.GetInteger("cell","edgeColorB",60), reader.GetInteger("cell","edgeColorA",255) };
 	const std::string GAME_NAME = "Mikesh's Game of Life";
 	const std::string HYPEN = " | ";
@@ -221,4 +187,10 @@ int WinMain()
 	}
 
 	CloseWindow();
+}
+
+// Definition of WinMain for Windows subsystem
+int WinMain()
+{
+	return main();
 }
