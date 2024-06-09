@@ -14,8 +14,9 @@ This is a simple implementation of Conway's Game of Life written in C++.
 
 ## Requirements
 
-- C++11 or later
+- C++17 or later
 - [raylib library](https://www.raylib.com/) (A simple and easy-to-use library to enjoy videogames programming)
+- [inih](https://github.com/benhoyt/inih) (inih (INI Not Invented Here) is a simple .INI file parser written in C.)
 
 ## Credits to
 
@@ -37,7 +38,8 @@ Thank you.
 - `Key right`: Decrease cell edges.
 - `F`: Toogle fullscreen ON/OFF.
 - `C`: Turn on/off random colors.
-- `Esc`: Exit the game.
+- `F1`: Help.
+- `F10`: Exit the game.
 
 ## Config file
 
