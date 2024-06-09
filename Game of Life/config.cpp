@@ -33,18 +33,18 @@ void Config::CreateDefaultConfigFile()
 	std::ofstream file(configFilename);
 	if (file.is_open()) {
 		file << "[window]\n";
-		file << "width=1280\n";
-		file << "height=720\n";
-		file << "fps=30\n";
-		file << "fullscreen=false\n";
+		file << "width=1280				; 2560, 1920\n";
+		file << "height=720				; 1440, 1080\n";
+		file << "fps=30	 				; target FPS\n";
+		file << "fullscreen=false		; start with fullscreen\n";
 		file << "[cell]\n";
-		file << "size=5\n";
-		file << "edgeColorR=60\n";
-		file << "edgeColorG=60\n";
-		file << "edgeColorB=60\n";
-		file << "edgeColorA=255\n";
-		file << "edgeWidth=1\n";
-		file << "randomColors=true\n";
+		file << "size=5					; cell size\n";
+		file << "edgeColorR=60			; cell edge color RED\n";
+		file << "edgeColorG=60			; cell edge color GREEN\n";
+		file << "edgeColorB=60			; cell edge color BLUE\n";
+		file << "edgeColorA=255			; cell edge color ALPHA\n";
+		file << "edgeWidth=1				; default cell edge width\n";
+		file << "randomColors=true		; default random color effect\n";
 		file.close();
 	}
 	else {
