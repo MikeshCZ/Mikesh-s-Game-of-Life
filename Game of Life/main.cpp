@@ -183,6 +183,7 @@ int main()
 			if (simulation.IsClear())
 			{
 				simulation.CreateRandomState();
+				simulation.ResetGeneration();
 				simulation.Start();
 			}
 			else
@@ -191,12 +192,14 @@ int main()
 				{
 					simulation.Stop();
 					simulation.CreateRandomState();
+					simulation.ResetGeneration();
 					simulation.Start();
 
 				}
 				else
 				{
 					simulation.ClearGrid();
+					simulation.ResetGeneration();
 				}
 			}
 		}
@@ -232,7 +235,7 @@ int main()
 		// Update windows title
 		std::string runStatus = simulation.IsRunning() ? "Running" : "Pause";
 		std::string fpsStatus = "Target FPS: " + std::to_string(fps);
-		std::string strInfo = GAME_NAME + HYPEN + runStatus + HYPEN + fpsStatus + HYPEN + "Press F1 for help";
+		std::string strInfo = GAME_NAME + HYPEN + runStatus + HYPEN + fpsStatus + HYPEN + "F1 HELP" + HYPEN + "Generation: " + std::to_string(simulation.GetGeneration());
 		const char* info = strInfo.c_str();
 
 		// Drawing the window

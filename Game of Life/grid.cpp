@@ -159,7 +159,7 @@ int Grid::AdjustColorComponent(int colorComponent, int randomSize)
 
 Color Grid::SetColor(int red, int green, int blue, int alpha)
 {
-	Color color;
+	Color color{};
 	color.r = std::clamp(red, 0, 255);
 	color.g = std::clamp(green, 0, 255);
 	color.b = std::clamp(blue, 0, 255);

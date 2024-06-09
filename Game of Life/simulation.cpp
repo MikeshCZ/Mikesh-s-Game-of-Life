@@ -74,6 +74,7 @@ void Simulation::Update()
 			}
 		}
 		grid = tempGrid;
+		AddGeneration();
 	}
 }
 
@@ -158,4 +159,19 @@ void Simulation::SetRandomSize(int value)
 {
 	grid.SetRandomSize(value);
 	tempGrid.SetRandomSize(value);
+}
+
+void Simulation::ResetGeneration()
+{
+	generation = 0;
+}
+
+void Simulation::AddGeneration()
+{
+	generation++;
+}
+
+unsigned long Simulation::GetGeneration()
+{
+	return generation;
 }
