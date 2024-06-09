@@ -139,3 +139,23 @@ int Simulation::GetEdges()
 {
 	return grid.GetEdges();
 }
+
+void Simulation::SetColor(bool isLiveColor, int red, int green, int blue, int alpha)
+{
+	if (isLiveColor)
+	{
+		grid.SetColorLive(red, green, blue, alpha);
+		tempGrid.SetColorLive(red, green, blue, alpha);
+	}
+	else
+	{
+		grid.SetColorDead(red, green, blue, alpha);
+		tempGrid.SetColorDead(red, green, blue, alpha);
+	}
+}
+
+void Simulation::SetRandomSize(int value)
+{
+	grid.SetRandomSize(value);
+	tempGrid.SetRandomSize(value);
+}

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
 #include "simulation.h"
 #include "config.h"
 
@@ -14,45 +15,99 @@ int main()
 
 	Config config;
 	int initOK = config.Initialization();
+
+	// If reading of the config fail return 1
 	if (initOK == 1) { return 1; }
+	
 	INIReader reader(config.GetFileName());
 	
 	// ##################
 	// # INICIALIZATION #
 	// ##################
 
+	// ---------
 	// Constants
+	// ---------
+
 	const int WINDOW_WIDTH = reader.GetInteger("window", "width", 1280);
 	const int WINDOW_HEIGHT = reader.GetInteger("window", "height", 720);
+	const int GRID_WIDTH = WINDOW_WIDTH;
+	const int GRID_HEIGHT = WINDOW_HEIGHT - 30;
 	const int CELL_SIZE = reader.GetInteger("cell", "size", 5);
-	const Color GREY = { reader.GetInteger("cell","edgeColorR",60), reader.GetInteger("cell","edgeColorG",60), reader.GetInteger("cell","edgeColorB",60), 255 };
+	const Color EDGE = { reader.GetInteger("color","edgeColorR",60), reader.GetInteger("color","edgeColorG",60), reader.GetInteger("color","edgeColorB",60), 255 };
 	const std::string GAME_NAME = "Mikesh's Game of Life";
 	const std::string HYPEN = " | ";
 	const char* windowTitle = GAME_NAME.c_str();
 	
-	// Set variables
-	int fps = reader.GetInteger("window", "fps", 30);
-	fps = (fps < 1) ? 1 : fps;
-	fps = (fps > 1000) ? 1000 : fps;
-
-	int edgeWidth = reader.GetInteger("cell", "edgeWidth", 1);
-	edgeWidth = (edgeWidth < 0) ? 0 : edgeWidth;
-	edgeWidth = (edgeWidth > CELL_SIZE - 1) ? CELL_SIZE - 1 : edgeWidth;
+	// Text for the F1 Help window
+	const char* helpText = 
+		"F1							Show/Close this help\n\n"
+		"Left Click			Add cell state (alive).\n"
+		"Right Click			Remove cell state (dead).\n\n"
+		"Space					Start/stop the simulation.\n"
+		"ENTER				Clear / Reset the board.\n\n"
+		"Key up				Increase the simulation speed.\n"
+		"Key down			Decrease the simulation speed.\n"
+		"Key left			Increase cell edges.\n"
+		"Key right			Decrease cell edges.\n\n"
+		"F								Toggle fullscreen ON/OFF.\n"
+		"C								Turn on/off random colors.\n\n"
+		"F10						Exit the game.";
 	
-	bool randomColors = reader.GetBoolean("cell","randomColors", true);
-	bool fullscreen = reader.GetBoolean("window", "fullscreen", false);
-	bool state = false;
+	// -------------
+	// Set variables
+	// -------------
+	
+	// Target FPS of the app
+	int fps = reader.GetInteger("window", "fps", 30);
+	fps = std::clamp(fps, 1, 240);
 
+	// Width of the cell edges
+	int edgeWidth = reader.GetInteger("cell", "edgeWidth", 1);
+	edgeWidth = std::clamp(edgeWidth, 0, CELL_SIZE - 1);
+	
+	// Random colors feature 
+	bool randomColors = reader.GetBoolean("cell","randomColors", true);
+
+	// Fullscreen
+	bool fullscreen = reader.GetBoolean("window", "fullscreen", false);
+	
+	// State of the cell (live/dead)
+	bool state;
+	
+	// Show help window
+	bool showHelp = false;
+
+	// Main Help widnow as rectangle
+	Rectangle helpWindow = { WINDOW_WIDTH/2 - 400/2, WINDOW_HEIGHT/2 - 280/2, 400, 280 };
+
+	// ----------------
 	// Init Main window
+	// ----------------
+
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, windowTitle);
 	if (fullscreen) { ToggleFullscreen(); }
 	SetTargetFPS(fps);
+	SetExitKey(KEY_F10);
 
+	// ----------------------------
 	// Create and set up simulation
-	Simulation simulation(WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE);
-	simulation.SetEdges(edgeWidth);
-	if (randomColors != simulation.IsRandomColors()) { simulation.ToggleRandomColors(); }
+	// ----------------------------
 
+	// Main simulation class
+	Simulation simulation(GRID_WIDTH, GRID_HEIGHT, CELL_SIZE);
+	
+	// Set up edge width
+	simulation.SetEdges(edgeWidth);
+	
+	// Set up colors from INI file
+	simulation.SetColor(true, reader.GetInteger("color", "liveColorR", 0), reader.GetInteger("color", "liveColorG", 170), reader.GetInteger("color", "liveColorB", 170), reader.GetInteger("color", "liveColorA", 255));
+	simulation.SetColor(false, reader.GetInteger("color", "deadColorR", 140), reader.GetInteger("color", "deadColorG", 100), reader.GetInteger("color", "deadColorB", 80), reader.GetInteger("color", "deadColorA", 130));
+	
+	// randomColors from INI file
+	if (randomColors != simulation.IsRandomColors()) { simulation.ToggleRandomColors(); }
+	simulation.SetRandomSize(reader.GetInteger("cell", "randomSize", 10));
+	
 	// #############
 	// # MAIN LOOP #
 	// #############
@@ -76,7 +131,7 @@ int main()
 			}
 			
 			Vector2 mousePosition = GetMousePosition();
-			int row = mousePosition.y / CELL_SIZE;
+			int row = (mousePosition.y - 30) / CELL_SIZE;
 			int column = mousePosition.x / CELL_SIZE;
 			simulation.ToggleCell(row, column, state);
 		}
@@ -155,6 +210,10 @@ int main()
 		{
 			ToggleFullscreen();
 		}
+		else if (IsKeyPressed(KEY_F1) || (showHelp && IsKeyPressed(KEY_ESCAPE)))
+		{
+			showHelp = !showHelp;
+		}
 		 
 		// -----------------
 		// 2. Updating state
@@ -171,21 +230,26 @@ int main()
 		// ----------
 		
 		// Update windows title
-		std::string runStatus = simulation.IsRunning() ? "[SPC] Running" : "[SPC] Pause";
-		std::string fpsStatus = "[UP/DOWN] Speed: " + std::to_string(fps);
-		std::string randomStatus = simulation.IsRandomColors() ? "[C] Colors: ON" : "[C] Colors: OFF";
-		std::string edgesStatus = "[LEFT/RIGHT] Edges: " + std::to_string(simulation.GetEdges());
-		std::string strTitle = GAME_NAME + HYPEN + runStatus + HYPEN + fpsStatus + HYPEN + randomStatus + HYPEN + edgesStatus + HYPEN + "[ENTER] Clear/Generate canvas | [LMB/RMB] Draw/Clear point";
-		windowTitle = strTitle.c_str();
-		SetWindowTitle(windowTitle);
+		std::string runStatus = simulation.IsRunning() ? "Running" : "Pause";
+		std::string fpsStatus = "Target FPS: " + std::to_string(fps);
+		std::string strInfo = GAME_NAME + HYPEN + runStatus + HYPEN + fpsStatus + HYPEN + "Press F1 for help";
+		const char* info = strInfo.c_str();
 
 		// Drawing the window
 		BeginDrawing();
-		ClearBackground(GREY);
-		simulation.Draw();
+			ClearBackground(EDGE);
+			DrawRectangle(0, 0, WINDOW_WIDTH, 30, BLACK);
+			DrawText(info, 5, 5, 20, WHITE);
+			DrawFPS(WINDOW_WIDTH - 90, 5);
+			simulation.Draw();
+			if (showHelp)
+			{
+				DrawRectangleRec(helpWindow, Fade(SKYBLUE, 0.5f));
+				DrawRectangleLinesEx(helpWindow, 3, BLUE);
+				DrawText(helpText, helpWindow.x + 10, helpWindow.y + 10, 16, DARKGRAY);
+			}
 		EndDrawing();
 	}
-
 	CloseWindow();
 }
 

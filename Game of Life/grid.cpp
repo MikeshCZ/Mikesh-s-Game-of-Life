@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include <algorithm>
 #include "grid.h"
 
 void Grid::Draw()
@@ -10,26 +11,22 @@ void Grid::Draw()
 			// Randomize colors
 			if (randomColors)
 			{
-				int randomValue = 0;
 				// live color
-				randomValue = GetRandomValue(0, 20);
-				tempLive.r = live.r + randomValue;
-				randomValue = GetRandomValue(-10, 10);
-				tempLive.g = live.g + randomValue;
-				randomValue = GetRandomValue(-10, 10);
-				tempDead.b = dead.b + randomValue;
+				tempLive.r = AdjustColorComponent(live.r, randomSize);
+				tempLive.g = AdjustColorComponent(live.g, randomSize);
+				tempLive.b = AdjustColorComponent(live.b, randomSize);
+				tempLive.a = AdjustColorComponent(live.a, randomSize);
+
 				// dead color
-				randomValue = GetRandomValue(-10, 10);
-				tempDead.r = dead.r + randomValue;
-				randomValue = GetRandomValue(-10, 10);
-				tempDead.g = dead.g + randomValue;
-				randomValue = GetRandomValue(-10, 10);
-				tempLive.b = live.b + randomValue;
+				tempDead.r = AdjustColorComponent(dead.r, randomSize);
+				tempDead.g = AdjustColorComponent(dead.g, randomSize);
+				tempDead.b = AdjustColorComponent(dead.b, randomSize);
+				tempDead.a = AdjustColorComponent(dead.a, randomSize);
 			}
 
 			// Draw
 			Color color = cells[row][column] ? tempLive : tempDead;
-			DrawRectangle(column * cellSize, row * cellSize, cellSize - edgesWidth, cellSize - edgesWidth, color);
+			DrawRectangle(column * cellSize, row * cellSize + 30, cellSize - edgesWidth, cellSize - edgesWidth, color);
 		}
 	}
 }
@@ -47,6 +44,10 @@ int Grid::GetValue(int row, int column)
 	if (IsWithinBounds(row,column))
 	{
 		return cells[row][column];
+	}
+	else
+	{
+		return 0;
 	}
 }
 
@@ -116,9 +117,9 @@ bool Grid::IsRandomColors()
 	return randomColors;
 }
 
-void Grid::SetEdges(int edgeWidth)
+void Grid::SetEdges(int width)
 {
-	edgesWidth = edgeWidth;
+	edgesWidth = width;
 }
 
 int Grid::GetEdges()
@@ -126,7 +127,43 @@ int Grid::GetEdges()
 	return edgesWidth;
 }
 
+void Grid::SetColorLive(int red, int green, int blue, int alpha)
+{
+	live = SetColor(red, green, blue, alpha);
+	tempLive = live;
+}
+
+void Grid::SetColorDead(int red, int green, int blue, int alpha)
+{
+	dead = SetColor(red, green, blue, alpha);
+	tempDead = dead;
+}
+
+void Grid::SetRandomSize(int value)
+{
+	randomSize = value;
+}
+
 bool Grid::IsWithinBounds(int row, int column)
 {
 	return (row >= 0 && row < rows && column >= 0 && column < columns) ? true : false;
+}
+
+int Grid::AdjustColorComponent(int colorComponent, int randomSize)
+{
+	randomSize = std::clamp(randomSize, 0, 127);
+	int randomValue = GetRandomValue(-randomSize, randomSize);
+	int adjustedValue = colorComponent + randomValue;
+	return std::clamp(adjustedValue, 0, 255);
+}
+
+Color Grid::SetColor(int red, int green, int blue, int alpha)
+{
+	Color color;
+	color.r = std::clamp(red, 0, 255);
+	color.g = std::clamp(green, 0, 255);
+	color.b = std::clamp(blue, 0, 255);
+	color.a = std::clamp(alpha, 0, 255);
+
+	return color;
 }
