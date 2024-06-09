@@ -25,7 +25,7 @@ int main()
 	const int WINDOW_WIDTH = reader.GetInteger("window", "width", 1280);
 	const int WINDOW_HEIGHT = reader.GetInteger("window", "height", 720);
 	const int CELL_SIZE = reader.GetInteger("cell", "size", 5);
-	const Color GREY = { reader.GetInteger("cell","edgeColorR",60), reader.GetInteger("cell","edgeColorG",60), reader.GetInteger("cell","edgeColorB",60), reader.GetInteger("cell","edgeColorA",255) };
+	const Color GREY = { reader.GetInteger("cell","edgeColorR",60), reader.GetInteger("cell","edgeColorG",60), reader.GetInteger("cell","edgeColorB",60), 255 };
 	const std::string GAME_NAME = "Mikesh's Game of Life";
 	const std::string HYPEN = " | ";
 	const char* windowTitle = GAME_NAME.c_str();

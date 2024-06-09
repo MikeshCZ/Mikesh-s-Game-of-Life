@@ -42,7 +42,6 @@ void Config::CreateDefaultConfigFile()
 		file << "edgeColorR=60			; cell edge color RED\n";
 		file << "edgeColorG=60			; cell edge color GREEN\n";
 		file << "edgeColorB=60			; cell edge color BLUE\n";
-		file << "edgeColorA=255			; cell edge color ALPHA\n";
 		file << "edgeWidth=1				; default cell edge width\n";
 		file << "randomColors=true		; default random color effect\n";
 		file.close();
