@@ -17,6 +17,10 @@ int Config::Initialization()
 		std::cout << "Can't load '" + configFilename + "'\n";
 		return 1;
 	}
+	else
+	{
+		return 0;
+	}
 }
 
 std::string Config::GetFileName()
