@@ -2,6 +2,8 @@
 
 This is a simple implementation of Conway's Game of Life written in C++.
 
+![screenshot](https://raw.githubusercontent.com/MikeshCZ/Game-of-Life/main/screenshot.png)
+
 ## Overview
 
 [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves.
