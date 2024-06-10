@@ -1,4 +1,4 @@
-# Game of Life
+# Mikesh's Game of Life
 
 This is a simple implementation of Conway's Game of Life written in C++.
 
@@ -21,34 +21,46 @@ This is a simple implementation of Conway's Game of Life written in C++.
 - [raygui](https://github.com/raysan5/raygui) is a simple and easy-to-use immediate-mode-gui library.
 - [inih](https://github.com/benhoyt/inih) (inih (INI Not Invented Here) is a simple .INI file parser written in C.)
 
-For VS I recomending to use [vcpkg](https://vcpkg.io) to install all above mention libraries.
+For VS I am recommending using [vcpkg](https://vcpkg.io) to install all above mention libraries.
 
 ## Credits
 
-Inspirated with Programming With Nick and his tutorial [Conway's Game of Life tutorial in C++ & raylib - OOP](https://youtu.be/daFYGrXq0aw?si=TnnAfXES8tl2I8s9). 
+Inspired by Programming With Nick and his tutorial [Conway's Game of Life tutorial in C++ & raylib - OOP](https://youtu.be/daFYGrXq0aw?si=TnnAfXES8tl2I8s9). 
 
-Tutorial repository is [here](https://github.com/educ8s/CPP-Game-Of-Life-with-raylib).
+The tutorial repository is [here](https://github.com/educ8s/CPP-Game-Of-Life-with-raylib).
 
 Thank you.
 
 ## Controls
 
 `F1` - Show/Close this help
+
 `Left Click` - Add cell state (alive)
+
 `Right Click` - Remove cell state (dead)
+
 `Space` - Start/stop the simulation
+
 `ENTER` - Clear / Reset the board
+
 `Key up` - Increase the simulation speed
+
 `Key down` - Decrease the simulation speed
+
 `Key left` - Increase cell edges
+
 `Key right` - Decrease cell edges
-`S` - Only one generation (when game is paused).
+
+`S` - Only one generation (when the game is paused).
+
 `F` - Toggle fullscreen ON/OFF
+
 `C` - Turn on/off random colors
+
 `F10` - Exit the game
 
 ## Config file
 
-Some of the start up parameters can be adjusted in `config.ini` file. If file does not exist, it will be created during first lunch of the game with default parameters.
+Some of the start-up parameters can be adjusted in the `config.ini` file. If the file does not exist, it will be created during the first launch of the game with default parameters.
 
-# Enjoy!
+# Enjoy the Game of Life!
