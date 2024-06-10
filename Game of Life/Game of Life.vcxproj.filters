@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="config.ini">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>
