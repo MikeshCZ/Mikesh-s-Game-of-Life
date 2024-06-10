@@ -52,6 +52,7 @@ int main()
 		"[Key down] - Decrease the simulation speed.\n"
 		"[Key left] - Increase cell edges.\n"
 		"[Key right] - Decrease cell edges.\n\n"
+		"[S] - Only one generation (when game is paused).\n"
 		"[F] - Toggle fullscreen ON/OFF.\n"
 		"[C] - Turn on/off random colors.\n\n"
 		"[F10] - Exit the game.";
@@ -75,6 +76,7 @@ int main()
 	Vector4 menuWindow = { 500, 200, 300, 400 };						// Menu window parameter x, y, width, height
 	Vector2 panOffset{};												// Ofset of the mouse when dragging the main window
 	bool dragMenu = false;												// Dragging the menu window
+	bool oneStep = false;												// oneStep mode
 
 	// ----------------
 	// Init Main window
@@ -233,9 +235,16 @@ int main()
 		{
 			ToggleFullscreen();
 		}
+		// Open / close menu
 		else if (IsKeyPressed(KEY_F1) || (IsMenuActive && IsKeyPressed(KEY_ESCAPE)))
 		{
 			IsMenuActive = !IsMenuActive;
+		}
+		// One step
+		else if (IsKeyPressed(KEY_S) && !simulation.IsRunning() && !oneStep)
+		{
+			oneStep = true;
+			simulation.Start();
 		}
 		 
 		// -----------------
@@ -274,6 +283,11 @@ int main()
 				DrawText(helpText, menuWindow.x + 10, menuWindow.y + 30, 10, DARKGRAY);			
 			}
 		EndDrawing();
+		if (oneStep)
+		{
+			oneStep = false;
+			simulation.Stop();
+		}
 	}
 	CloseWindow();
 }

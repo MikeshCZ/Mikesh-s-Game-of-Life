@@ -137,15 +137,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="config.cpp" />
-    <ClCompile Include="grid.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="simulation.cpp" />
+    <ClCompile Include="../src/config.cpp" />
+    <ClCompile Include="../src/grid.cpp" />
+    <ClCompile Include="../src/main.cpp" />
+    <ClCompile Include="../src/simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="config.h" />
-    <ClInclude Include="grid.h" />
-    <ClInclude Include="simulation.h" />
+    <ClInclude Include="../src/config.h" />
+    <ClInclude Include="../src/grid.h" />
+    <ClInclude Include="../src/simulation.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.ini" />
