@@ -144,12 +144,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\intro.cpp" />
     <ClCompile Include="src/config.cpp" />
     <ClCompile Include="src/grid.cpp" />
     <ClCompile Include="src/main.cpp" />
     <ClCompile Include="src/simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\intro.h" />
     <ClInclude Include="src/config.h" />
     <ClInclude Include="src/grid.h" />
     <ClInclude Include="src/simulation.h" />
@@ -158,6 +160,12 @@
     <CopyFileToFolders Include="ini/config.ini">
       <FileType>Document</FileType>
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)ini\</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="audio\music.ogg">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)audio\</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

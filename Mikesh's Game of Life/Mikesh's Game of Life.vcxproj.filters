@@ -27,6 +27,9 @@
     <ClCompile Include="src/simulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\intro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src/config.h">
@@ -38,9 +41,15 @@
     <ClInclude Include="src/simulation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\intro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ini/config.ini">
+      <Filter>Resource Files</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="audio\music.ogg">
       <Filter>Resource Files</Filter>
     </CopyFileToFolders>
   </ItemGroup>

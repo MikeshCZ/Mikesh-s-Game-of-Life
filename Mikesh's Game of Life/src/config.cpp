@@ -51,12 +51,14 @@ void Config::CreateDefaultConfigFile()
 		file << "[window]\n";
 		file << "width			= 1280		; 2560, 1920\n";
 		file << "height			= 720		; 1440, 1080\n";
-		file << "fps				= 30		; target FPS\n";
+		file << "fps				= 60		; target FPS\n";
 		file << "fullscreen		= false		; start with fullscreen\n";
+		file << "music			= true		; play background music\n";
+		file << "playIntro		= true		; play raylib intro\n";
 		file << "\n[cell]\n";
 		file << "size			= 5			; cell size\n";
 		file << "edgeWidth		= 1			; default cell edge width\n";
-		file << "randomColors	= true		; default random color effect\n";
+		file << "randomColors	= false		; default random color effect\n";
 		file << "randomSize		= 10		; random color +/- range\n";
 		file << "\n[color]\n";
 		file << "liveColorR		= 0			; live cell color RED\n";

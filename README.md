@@ -51,11 +51,13 @@ Thank you.
 
 `Key right` - Decrease cell edges
 
-`S` - Only one generation (when the game is paused).
+`S` - Only one generation (when the game is paused)
 
 `F` - Toggle fullscreen ON/OFF
 
 `C` - Turn on/off random colors
+
+`M` - Music on/off
 
 `F10` - Exit the game
 
