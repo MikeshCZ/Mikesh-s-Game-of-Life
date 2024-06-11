@@ -15,33 +15,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src/config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="grid.cpp">
+    <ClCompile Include="src/grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="simulation.cpp">
+    <ClCompile Include="src/main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="config.cpp">
+    <ClCompile Include="src/simulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="grid.h">
+    <ClInclude Include="src/config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="simulation.h">
+    <ClInclude Include="src/grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="config.h">
+    <ClInclude Include="src/simulation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.ini">
+    <CopyFileToFolders Include="ini/config.ini">
       <Filter>Resource Files</Filter>
-    </None>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

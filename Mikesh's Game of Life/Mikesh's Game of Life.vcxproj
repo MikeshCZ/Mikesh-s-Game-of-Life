@@ -70,6 +70,13 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)build\</OutDir>
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -133,22 +140,25 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
       <Version>1.00</Version>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="../src/config.cpp" />
-    <ClCompile Include="../src/grid.cpp" />
-    <ClCompile Include="../src/main.cpp" />
-    <ClCompile Include="../src/simulation.cpp" />
+    <ClCompile Include="src/config.cpp" />
+    <ClCompile Include="src/grid.cpp" />
+    <ClCompile Include="src/main.cpp" />
+    <ClCompile Include="src/simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="../src/config.h" />
-    <ClInclude Include="../src/grid.h" />
-    <ClInclude Include="../src/simulation.h" />
+    <ClInclude Include="src/config.h" />
+    <ClInclude Include="src/grid.h" />
+    <ClInclude Include="src/simulation.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.ini" />
+    <CopyFileToFolders Include="ini/config.ini">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)ini\</DestinationFolders>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

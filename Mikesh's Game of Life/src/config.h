@@ -14,6 +14,6 @@ private:
 	// Create default config to the file
 	void CreateDefaultConfigFile();
 	// config file name
-	const std::string configFilename = "config.ini";
+	const std::string configFilename = "ini/config.ini";
 };
 

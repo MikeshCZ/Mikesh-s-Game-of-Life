@@ -1,19 +1,35 @@
 #include "config.h"
 #include <INIReader.h>
 #include <iostream>
+#include <filesystem>
 #include <fstream>
 
 int Config::Initialization()
 {
-	std::ifstream infile(configFilename);
+	std::string dir = "ini";	// folder for ini file
+
+	if (!std::filesystem::exists(dir)) {	// If the folder does not exist, we will try to create it
+		if (std::filesystem::create_directory(dir)) {
+			std::cout << "Folder 'ini' was successfully created." << std::endl;
+		}
+		else {
+			std::cerr << "Error creating the 'ini' folder." << std::endl;
+			return 1;
+		}
+	}
+	else {
+		std::cout << "The 'ini' folder already exists." << std::endl;
+	}
+	
+	std::ifstream infile(configFilename); // Check if the ini file exist
 	if (!infile.good()) {
 		std::cout << "Config file not found, creating default config file...\n";
 		CreateDefaultConfigFile();
 	}
 
-	INIReader reader(configFilename);
+	INIReader reader(configFilename); // Reader for config file
 
-	if (reader.ParseError() < 0) {
+	if (reader.ParseError() < 0) { // Can't load the file
 		std::cout << "Can't load '" + configFilename + "'\n";
 		return 1;
 	}
