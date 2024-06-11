@@ -58,7 +58,7 @@ void Config::CreateDefaultConfigFile()
 		file << "\n[cell]\n";
 		file << "size			= 5			; cell size\n";
 		file << "edgeWidth		= 1			; default cell edge width\n";
-		file << "randomColors	= false		; default random color effect\n";
+		file << "randomColors	= true		; default random color effect\n";
 		file << "randomSize		= 10		; random color +/- range\n";
 		file << "\n[color]\n";
 		file << "liveColorR		= 0			; live cell color RED\n";
