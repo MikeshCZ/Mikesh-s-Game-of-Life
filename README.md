@@ -16,12 +16,9 @@ This is a simple implementation of Conway's Game of Life written in C++.
 
 ## Requirements
 
-- C++17 or later
-- [raylib library](https://www.raylib.com/) (A simple and easy-to-use library to enjoy videogames programming)
-- [raygui](https://github.com/raysan5/raygui) is a simple and easy-to-use immediate-mode-gui library.
-- [inih](https://github.com/benhoyt/inih) (inih (INI Not Invented Here) is a simple .INI file parser written in C.)
-
-For VS I am recommending using [vcpkg](https://vcpkg.io) to install all above mention libraries.
+- C++17 or later.
+- [raylib library](https://www.raylib.com/) (A simple and easy-to-use library to enjoy videogames programming).
+- [raygui](https://github.com/raysan5/raygui) is a simple and easy-to-use immediate-mode-gui library (already part of `ext` folder).
 
 ## Credits
 
