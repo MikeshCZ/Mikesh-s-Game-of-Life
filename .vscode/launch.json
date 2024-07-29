@@ -10,7 +10,6 @@
   //
   //   Set up Windows System Environment PATH: 
   //     C:\msys64\ucrt64\bin; c:\msys64\usr\bin
-  
   "version": "0.2.0",
   "configurations": [
     {
@@ -21,7 +20,7 @@
       "program": "${workspaceFolder}/build/${workspaceFolderBasename}.exe",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}/build",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
@@ -36,7 +35,7 @@
       "program": "${workspaceFolder}/build/${workspaceFolderBasename}",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}/build",
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
