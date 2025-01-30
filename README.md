@@ -1,3 +1,5 @@
+<a href="https://www.buymeacoffee.com/michalsara" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 # Mikesh's Game of Life
 
 This is a simple implementation of Conway's Game of Life written in C++.
@@ -63,3 +65,5 @@ Thank you.
 Some of the start-up parameters can be adjusted in the `config.ini` file. If the file does not exist, it will be created during the first launch of the game with default parameters.
 
 # Enjoy the Game of Life!
+
+## If you like this repository you can **[buy me a coffee](https://www.buymeacoffee.com/michalsara)**. Thank You!
